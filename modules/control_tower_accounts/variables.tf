@@ -33,3 +33,15 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "account_tags" {
+  description = "A map of tags to apply to the provisioned account."
+  type        = map(string)
+  default     = {}
+}
+
+variable "custom_fields" {
+  description = "A map of custom fields to pass to the Account Factory. These are specific to your Account Factory customizations."
+  type        = map(string)
+  default     = {}
+}

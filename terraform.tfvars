@@ -23,6 +23,12 @@ core_ous = {
   }
 }
 
+service_control_policies = {}
+
+tag_policies = {}
+
+backup_policies = {}
+
 control_tower_managed_accounts = {
   "log_archive" = {
     account_name  = "LogArchive"
@@ -31,6 +37,8 @@ control_tower_managed_accounts = {
     sso_user_email = "log-archive-admin+${random_string.suffix.result}@example.com"
     sso_user_first_name = "LogArchive"
     sso_user_last_name = "Admin"
+    account_tags = {}
+    custom_fields = {}
   },
   "audit" = {
     account_name  = "Audit"
@@ -39,6 +47,8 @@ control_tower_managed_accounts = {
     sso_user_email = "audit-admin+${random_string.suffix.result}@example.com"
     sso_user_first_name = "Audit"
     sso_user_last_name = "Admin"
+    account_tags = {}
+    custom_fields = {}
   },
   "shared_services" = {
     account_name  = "SharedServices"
@@ -47,8 +57,46 @@ control_tower_managed_accounts = {
     sso_user_email = "shared-services-admin+${random_string.suffix.result}@example.com"
     sso_user_first_name = "SharedServices"
     sso_user_last_name = "Admin"
+    account_tags = {}
+    custom_fields = {}
   }
 }
+
+hub_vpc_cidr_block = "10.0.0.0/16"
+hub_subnet_cidrs = {
+  "a" = "10.0.1.0/24"
+  "b" = "10.0.2.0/24"
+}
+
+enable_vpc_flow_logs = true
+flow_logs_s3_bucket_name = ""
+
+enable_route53_resolver = false
+route53_resolver_inbound_ip_addresses = []
+route53_resolver_outbound_ip_addresses = []
+route53_resolver_target_ips = {}
+
+sso_admin_username = "admin"
+permission_sets = {}
+group_assignments = {}
+
+enable_guardduty = true
+enable_security_hub = true
+enable_aws_config = true
+config_recorder_name = "default"
+config_delivery_channel_name = "default"
+config_s3_bucket_name = ""
+
+enable_cloudtrail = true
+cloudtrail_name = "organization-trail"
+cloudtrail_s3_bucket_name = ""
+
+enable_waf = false
+waf_web_acl_name = "default-web-acl"
+waf_scope = "REGIONAL"
+
+secrets_manager_secrets = {}
+acm_certificates = {}
 
 deploy_direct_connect = false
 direct_connect_name = "my-dx-connection"

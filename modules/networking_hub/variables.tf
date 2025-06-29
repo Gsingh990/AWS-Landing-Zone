@@ -23,3 +23,42 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "enable_vpc_flow_logs" {
+  description = "Enable VPC Flow Logs for the Hub VPC."
+  type        = bool
+  default     = true
+}
+
+variable "flow_logs_s3_bucket_name" {
+  description = "S3 bucket name for VPC Flow Logs. If empty, a new one will be created."
+  type        = string
+  default     = ""
+}
+
+variable "enable_route53_resolver" {
+  description = "Enable Route 53 Resolver for centralized DNS."
+  type        = bool
+  default     = false
+}
+
+variable "route53_resolver_inbound_ip_addresses" {
+  description = "List of IP addresses for Route 53 Resolver inbound endpoints."
+  type        = list(string)
+  default     = []
+}
+
+variable "route53_resolver_outbound_ip_addresses" {
+  description = "List of IP addresses for Route 53 Resolver outbound endpoints."
+  type        = list(string)
+  default     = []
+}
+
+variable "route53_resolver_target_ips" {
+  description = "Map of DNS forward rules for Route 53 Resolver outbound endpoints."
+  type = map(object({
+    domain_name = string
+    target_ips  = list(string)
+  }))
+  default = {}
+}

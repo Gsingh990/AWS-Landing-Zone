@@ -20,3 +20,36 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "service_control_policies" {
+  description = "A map of Service Control Policies (SCPs) to create and attach."
+  type = map(object({
+    name        = string
+    description = string
+    content     = string # JSON policy document
+    target_ids  = list(string) # List of OU or Account IDs to attach to
+  }))
+  default = {}
+}
+
+variable "tag_policies" {
+  description = "A map of Tag Policies to create and attach."
+  type = map(object({
+    name        = string
+    description = string
+    content     = string # JSON policy document
+    target_ids  = list(string) # List of OU or Account IDs to attach to
+  }))
+  default = {}
+}
+
+variable "backup_policies" {
+  description = "A map of Backup Policies to create and attach."
+  type = map(object({
+    name        = string
+    description = string
+    content     = string # JSON policy document
+    target_ids  = list(string) # List of OU or Account IDs to attach to
+  }))
+  default = {}
+}

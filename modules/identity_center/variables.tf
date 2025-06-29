@@ -13,3 +13,25 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "permission_sets" {
+  description = "A map of custom permission sets to create."
+  type = map(object({
+    name             = string
+    description      = string
+    session_duration = string
+    managed_policy_arns = list(string)
+    inline_policy    = optional(string)
+  }))
+  default = {}
+}
+
+variable "group_assignments" {
+  description = "A map of group assignments to accounts with specific permission sets."
+  type = map(object({
+    group_name       = string
+    permission_set_name = string
+    account_id       = string
+  }))
+  default = {}
+}

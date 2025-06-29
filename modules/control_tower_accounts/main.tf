@@ -12,13 +12,15 @@ resource "aws_controltower_account_factory_account" "main" {
   account_email = var.account_email
   parent_ou_id  = var.parent_ou_id
 
-  # Optional: SSO User configuration
   sso_user_email      = var.sso_user_email
   sso_user_first_name = var.sso_user_first_name
   sso_user_last_name  = var.sso_user_last_name
 
-  # Optional: Tags for the account
-  tags = var.tags
+  # Merge module-level tags with account-specific tags
+  tags = merge(var.tags, var.account_tags)
+
+  # Pass custom fields to the Account Factory
+  custom_fields = var.custom_fields
 
   depends_on = [
     aws_controltower_account_factory_setup.main
