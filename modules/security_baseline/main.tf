@@ -7,8 +7,6 @@ resource "aws_guardduty_detector" "main" {
 
 resource "aws_securityhub_account" "main" {
   count = var.enable_security_hub ? 1 : 0
-
-  tags = var.tags
 }
 
 resource "aws_kms_key" "main" {
@@ -28,7 +26,6 @@ resource "aws_s3_bucket" "config_bucket" {
   count = var.enable_aws_config && var.config_s3_bucket_name == "" ? 1 : 0
 
   bucket = "aws-config-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
-  acl    = "private"
   tags   = var.tags
 }
 
@@ -141,7 +138,6 @@ resource "aws_s3_bucket" "cloudtrail_bucket" {
   count = var.enable_cloudtrail && var.cloudtrail_s3_bucket_name == "" ? 1 : 0
 
   bucket = "aws-cloudtrail-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
-  acl    = "private"
   tags   = var.tags
 }
 
